@@ -9,10 +9,12 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./counter-output.component.scss'],
 })
 export class CounterOutputComponent implements OnInit {
-  counter$: Observable<{ counter: number }> = new Observable<{counter:number}>();
+  counter: number = 0;
   constructor(private store: Store<{ counter: CounterState }>) {}
   ngOnInit(): void {
-    this.counter$ = this.store.select('counter');
+    this.store.select('counter').subscribe(data => {
+      this.counter = data.counter;
+    });
   }
 
  
